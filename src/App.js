@@ -1,20 +1,28 @@
-import { useEffect, useState } from 'react';
-import QuizList from './components/QuizList';
+import QuizList from './components/quiz/QuizList';
+import EditQuiz from './components/quiz/EditQuiz';
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import './App.css';
-import axios from 'axios';
+
+
 
 function App() {
-  const [quizzes, setQuizzes] = useState([]);
-  useEffect(() => {
-    axios.get('http://localhost:3000/api/quizzes/').then((res) => {
-      setQuizzes(res.data)
-    });
-    // setQuizzes([{"id":1}])
-  }, [setQuizzes])
   return (
-      <div className="App">
-        <QuizList quizzes={quizzes}/>
+    <Router>
+      <div className='mainApp'>
+        <nav>
+          <ul>
+            <li>
+              <Link to="/quizzes">Quizzes</Link>
+            </li>
+          </ul>
+        </nav>
+
+        <Routes >
+          <Route exact path="/quizzes" element={<QuizList />} />
+          <Route exact path="/quizzes/:quizId/" element={<EditQuiz />} />
+        </Routes >
       </div>
+    </Router>
   );
 }
 
