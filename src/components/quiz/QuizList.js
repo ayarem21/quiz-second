@@ -11,7 +11,7 @@ function QuizList () {
     QuizService.getAllQuizzes().then((res) => {
       setQuizzes(res.data)
     });
-  }, [setQuizzes])
+  }, [quizzes])
   return (
     <div className="quizList">
         {quizzes.map((quiz) => {

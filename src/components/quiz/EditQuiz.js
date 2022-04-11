@@ -11,12 +11,16 @@ function EditQuiz () {
          QuizService.getQuizById(quizId).then(async (res) => {
                 await setQuiz(res.data);
             });
-    }, [setQuiz])
+    }, [quiz])
     return(
         <div className="container">
             <Formik
                 enableReinitialize={ true }
                 initialValues = { quiz }
+                onSubmit={(updatedQuiz) => {
+                        QuizService.EditQuiz(quiz.id, updatedQuiz)
+                   }
+                }
             >
                 <Form>
                     <Field id="title" name="title"/>
