@@ -1,5 +1,3 @@
-import QuizService from '../../services/QuizService'
-
 export const ARCHIVE_QUIZ = "ARCHIVE_QUIZ";
 export const SET_QUIZZES = "GET_QUSET_QUIZZESIZZES";
 
@@ -10,10 +8,9 @@ export const setQuizzes = (quizzes) => {
     };
 };
 
-
-// export function updateQuiz(id) {
-//     return {
-//         type: ARCHIVE_QUIZ,
-//         payload: id,
-//     }
-// }
+export const updateQuiz = (id) => {
+    return {
+        type: ARCHIVE_QUIZ,
+        payload: id,
+    }
+}

@@ -8,17 +8,26 @@ export const quizReducer = (state = initialState, action) => {
     
     switch (action.type) {
         case SET_QUIZZES:
-            console.log('payload', action.payload)
             return {
                 ...state,
                 quizzes: action.payload
             };
+        case ARCHIVE_QUIZ:
+            // console.log(state)
+            //  state.quizzes.map(quiz =>
+            //     quiz.id === action.payload.quizId 
+            //     ? {...quiz, isArchived: !quiz.isArchived} 
+            //     : quiz
+            //     );
+            //     console.log(state.quizzes);
+            return {
+                ...state,
+                quizzes: state.quizzes.map(quiz =>
+                    quiz.id === action.payload.quizId 
+                    ? {...quiz, isArchived: !quiz.isArchived} 
+                    : quiz)
+            };
         default:
             return state;
-        // case ARCHIVE_QUIZ:
-        //     let newQuizzes = [...state];
-        //     let needForUpdate = newQuizzes.find(q => q.id === action.payload.quizId)
-        //     needForUpdate.isArchived = !needForUpdate.isArchived;
-        //     return newQuizzes;
     }
 }

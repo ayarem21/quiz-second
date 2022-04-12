@@ -9,9 +9,8 @@ import { updateQuiz } from "../../redux/actions/quizActions";
 
 
 function Quiz({ quiz }) {
-  // const [isArchived, setIsArchived] = useState(quiz.isArchived);
-  // let dispatch = useDispatch();
-  // let quizId = quiz.id;
+  let dispatch = useDispatch();
+  const quizId = quiz.id;
   return (
     <div className="container">
       <h3>{quiz.title}</h3>
@@ -21,11 +20,10 @@ function Quiz({ quiz }) {
         enableReinitialize={ true }
         initialValues = {{ isArchived: quiz.isArchived }}
         onSubmit={() => {
-                // dispatch(updateQuiz({
-                //   quizId
-                // }))
-
-                //  QuizService.changeArchiveProperty(quiz.id);
+                QuizService.changeArchiveProperty(quiz.id);
+                dispatch(updateQuiz({
+                  quizId
+                }));
           }
         }
       >

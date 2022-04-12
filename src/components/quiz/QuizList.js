@@ -18,18 +18,8 @@ function QuizList () {
   useEffect(() => {
     fetchQuizzes();
   }, [])
-  
-  // getAllQuizzes()
 
-  // let quizzes = useSelector(state => state.quizzes);
-  // const [quizzes, setQuizzes] = useState([]);
-  // useEffect(() => {
-  //   QuizService.getAllQuizzes().then((res) => {
-  //     setQuizzes(res.data)
-  //   });
-  // }, [quizzes])
 
-  console.log(quizzes)
   return (
     <div className="quizList">
         {quizzes.map((quiz) => {
