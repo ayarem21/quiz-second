@@ -1,17 +1,35 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Quiz from "./Quiz";
-import { useEffect, useState } from 'react';
-import QuizService from '../../services/QuizService'
 import './QuizList.css'
+import { useDispatch, useSelector } from "react-redux";
+import { setQuizzes } from "../../redux/actions/quizActions";
+import QuizService from '../../services/QuizService'
 
 
 function QuizList () {
-  const [quizzes, setQuizzes] = useState([]);
+  const quizzes = useSelector((state) => state.allQuizzes.quizzes);
+  const dispatch = useDispatch();
+
+  const fetchQuizzes = async () => {
+    const response = await QuizService.getAllQuizzes();
+    dispatch(setQuizzes(response.data));
+  }
+
   useEffect(() => {
-    QuizService.getAllQuizzes().then((res) => {
-      setQuizzes(res.data)
-    });
-  }, [quizzes])
+    fetchQuizzes();
+  }, [])
+  
+  // getAllQuizzes()
+
+  // let quizzes = useSelector(state => state.quizzes);
+  // const [quizzes, setQuizzes] = useState([]);
+  // useEffect(() => {
+  //   QuizService.getAllQuizzes().then((res) => {
+  //     setQuizzes(res.data)
+  //   });
+  // }, [quizzes])
+
+  console.log(quizzes)
   return (
     <div className="quizList">
         {quizzes.map((quiz) => {
