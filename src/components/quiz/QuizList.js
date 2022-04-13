@@ -1,24 +1,12 @@
 import React, { useEffect } from "react";
 import Quiz from "./Quiz";
 import './QuizList.css'
-import { useDispatch, useSelector } from "react-redux";
-import { setQuizzes } from "../../redux/actions/quizActions";
-import QuizService from '../../services/QuizService'
+import { useSelector } from "react-redux";
+
 
 
 function QuizList () {
   const quizzes = useSelector((state) => state.allQuizzes.quizzes);
-  const dispatch = useDispatch();
-
-  const fetchQuizzes = async () => {
-    const response = await QuizService.getAllQuizzes();
-    dispatch(setQuizzes(response.data));
-  }
-
-  useEffect(() => {
-    fetchQuizzes();
-  }, [])
-
 
   return (
     <div className="quizList">

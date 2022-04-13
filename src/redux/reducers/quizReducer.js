@@ -1,11 +1,10 @@
-import { ARCHIVE_QUIZ, SET_QUIZZES } from "../actions/quizActions";
+import { ARCHIVE_QUIZ, EDIT_QUIZ, SET_QUIZZES } from "../actions/quizActions";
 
 const initialState = {
     quizzes: [],
 };
 
 export const quizReducer = (state = initialState, action) => {
-    
     switch (action.type) {
         case SET_QUIZZES:
             return {
@@ -13,18 +12,20 @@ export const quizReducer = (state = initialState, action) => {
                 quizzes: action.payload
             };
         case ARCHIVE_QUIZ:
-            // console.log(state)
-            //  state.quizzes.map(quiz =>
-            //     quiz.id === action.payload.quizId 
-            //     ? {...quiz, isArchived: !quiz.isArchived} 
-            //     : quiz
-            //     );
-            //     console.log(state.quizzes);
             return {
                 ...state,
                 quizzes: state.quizzes.map(quiz =>
                     quiz.id === action.payload.quizId 
                     ? {...quiz, isArchived: !quiz.isArchived} 
+                    : quiz)
+            };
+        case EDIT_QUIZ:
+            console.log(action)
+            return {
+                ...state,
+                quizzes: state.quizzes.map(quiz =>
+                    quiz.id == action.payload.quizId
+                    ? {...quiz, title: action.payload.updatedQuiz.title, description: action.payload.updatedQuiz.description, isArchived: action.payload.updatedQuiz.isArchived} 
                     : quiz)
             };
         default:
